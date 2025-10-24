@@ -1,5 +1,14 @@
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import Pizza from "./Pizza.jsx";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { routeTree } from "./routeTree.gen";
+// import Pizza from "./Pizza.jsx";
+// import PizzaOfTheDay from "./PizzaOfTheDay.jsx";
+// import Order from "./Order.jsx";
+// import Header from "./Header.jsx";
+// import { CartContext } from "./contexts.jsx";
+// import Cart from "./Cart.jsx";
 
 // const Pizza = (props) => {
 //   return React.createElement("div", {}, [
@@ -20,26 +29,42 @@ import Pizza from "./Pizza.jsx";
 //   );
 // };
 
+const router = createRouter({
+  routeTree,
+});
+const queryClient = new QueryClient();
+
 const App = () => {
+  // const cartHook = useState([]);
   return (
-    <div>
-      <h1>Padre Gino's</h1>
-      <Pizza
+    <StrictMode>
+      {/* <CartContext.Provider value={cartHook}> */}
+      {/* <div> */}
+      {/* <h1 className="logo">Padre Gino's - Order Now</h1> */}
+      {/* <Pizza
         name="The Pepperoni Pizza"
         description="pep, cheese, n stuff"
         image={"/public/pizzas/pepperoni.webp"}
-      />
-      <Pizza
+        />
+        <Pizza
         name="The Hawaiian Pizza"
         description="ham, pinapple, n stuff"
         image={"/public/pizzas/hawaiian.webp"}
-      />
-      <Pizza
+        />
+        <Pizza
         name="The Plain Cheese Pizza"
         description="just cheese, n stuff"
         image={"/public/pizzas/big_meat.webp"}
-      />
-    </div>
+        /> */}
+      {/* <Header />
+          <Order />
+          <PizzaOfTheDay />
+          </div>
+          </CartContext.Provider> */}
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </StrictMode>
   );
 };
 
